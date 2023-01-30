@@ -1,5 +1,6 @@
 import { token, user } from './storage'
 import iziToast from 'izitoast'
+import 'izitoast/dist/css/iziToast.min.css'
 
 export const API_BASE = import.meta.env.VITE_VMSCHED_API
 

@@ -16,7 +16,7 @@
                 <div class="text-caption">
                   {{
                     Object.entries(itype.price)
-                      .map(([key, val]) => `${val}${key}`)
+                      .map(([key, val]) => `${val}@${key}`)
                       .join()
                   }}
                 </div>
