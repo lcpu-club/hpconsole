@@ -27,19 +27,26 @@ const props = defineProps<{
 const url = computed(() => atob(props.connect))
 const terminal = ref<HTMLDivElement>(null as never)
 
-var term = new Terminal()
+const term = new Terminal()
 const fitAddon = new FitAddon()
 const searchAddon = new SearchAddon()
 const webLinksAddon = new WebLinksAddon()
-const attachAddon = new AttachAddon(new WebSocket(url.value))
 term.loadAddon(fitAddon)
 term.loadAddon(searchAddon)
 term.loadAddon(webLinksAddon)
 
 onMounted(() => {
   term.writeln('Connecting to ' + url.value)
+  const socket = new WebSocket(url.value)
+  const attachAddon = new AttachAddon(socket)
   term.loadAddon(attachAddon)
   term.open(terminal.value)
+  socket.addEventListener('close', () => {
+    term.writeln('Connection closed.')
+  })
+  socket.addEventListener('error', () => {
+    term.writeln('Connection error.')
+  })
 })
 
 function onResize() {
