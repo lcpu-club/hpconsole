@@ -90,8 +90,12 @@ function spice() {
   window.open(url, '_blank')
 }
 
+const wsPrefix =
+  (location.protocol === 'https:' ? 'wss:' : 'ws:') + '//' + location.host
+
 function shell() {
   const url =
+    wsPrefix +
     wsBase +
     '/console?' +
     new URLSearchParams({
@@ -107,6 +111,7 @@ const execCmd = ref('')
 
 function exec() {
   const url =
+    wsPrefix +
     wsBase +
     '/exec?' +
     new URLSearchParams({
