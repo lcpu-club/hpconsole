@@ -1,4 +1,5 @@
 import { token, user } from './storage'
+import iziToast from 'izitoast'
 
 export const API_BASE = import.meta.env.VITE_VMSCHED_API
 
@@ -17,11 +18,23 @@ async function invoke(method: string, path: string, payload?: unknown) {
     }
     init.body = JSON.stringify(payload)
   }
-  const res = await fetch(`${API_BASE}${path}`, init)
-  if (!res.ok) {
-    throw new Error(res.statusText)
+  try {
+    const res = await fetch(`${API_BASE}${path}`, init)
+    if (!res.ok) {
+      throw new Error(res.statusText)
+    }
+    const data = await res.json()
+    if ('success' in data && !data.success) {
+      throw new Error(data.message)
+    }
+    return data
+  } catch (err) {
+    iziToast.error({
+      title: 'Error',
+      message: err instanceof Error ? err.message : 'Unknown error'
+    })
+    throw err
   }
-  return res.json()
 }
 
 type Will<T> = T | (() => T)

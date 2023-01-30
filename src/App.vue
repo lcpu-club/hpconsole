@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts" setup>
-import { useRoute, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 import { isLoggedIn, token, user } from '@/utils/storage'
 import AppNav from '@/components/app/AppNav.vue'
 import AppBar from '@/components/app/AppBar.vue'
@@ -26,11 +26,14 @@ import { getUser } from './utils/api'
 
 const nav = ref<boolean>()
 
-const route = useRoute()
 const router = useRouter()
-if (route.query.tokenName && route.query.tokenSecret) {
-  token.value.tokenName = route.query.tokenName as string
-  token.value.tokenSecret = route.query.tokenSecret as string
+
+const search = new URLSearchParams(window.location.search)
+const tokenName = search.get('tokenName')
+const tokenSecret = search.get('tokenSecret')
+if (tokenName && tokenSecret) {
+  token.value.tokenName = tokenName as string
+  token.value.tokenSecret = tokenSecret as string
   router.replace({ path: '/' })
 }
 
