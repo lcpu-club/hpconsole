@@ -34,7 +34,7 @@ const tokenSecret = search.get('tokenSecret')
 if (tokenName && tokenSecret) {
   token.value.tokenName = tokenName as string
   token.value.tokenSecret = tokenSecret as string
-  router.replace({ path: '/' })
+  location.href = router.resolve({ path: '/' }).href
 }
 
 getUser(undefined).then((res) => {
