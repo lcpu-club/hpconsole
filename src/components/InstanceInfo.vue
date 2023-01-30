@@ -71,20 +71,24 @@ function command(action: string) {
   )
 }
 
+const wsBase = import.meta.env.VITE_VMSCHED_WS
+const router = useRouter()
+
 function spice() {
   const url =
     import.meta.env.VITE_SPICE_URL +
-    '?' +
-    new URLSearchParams({
-      instance: props.instanceName,
-      token_name: token.value.tokenName,
-      token_secret: token.value.tokenSecret
-    })
+    '?path=' +
+    encodeURIComponent(
+      wsBase +
+        '/spice?' +
+        new URLSearchParams({
+          instance: props.instanceName,
+          token_name: token.value.tokenName,
+          token_secret: token.value.tokenSecret
+        })
+    )
   window.open(url, '_blank')
 }
-
-const wsBase = import.meta.env.VITE_VMSCHED_WS
-const router = useRouter()
 
 function shell() {
   const url =
