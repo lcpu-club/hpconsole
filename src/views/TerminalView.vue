@@ -37,9 +37,9 @@ term.loadAddon(searchAddon)
 term.loadAddon(webLinksAddon)
 
 onMounted(() => {
-  term.open(terminal.value)
   term.writeln('Connecting to ' + url.value)
   term.loadAddon(attachAddon)
+  term.open(terminal.value)
 })
 
 function onResize() {
