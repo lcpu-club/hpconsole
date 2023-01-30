@@ -17,9 +17,7 @@ async function invoke(method: string, path: string, payload?: unknown) {
     }
     init.body = JSON.stringify(payload)
   }
-  const res = await fetch(`${API_BASE}${path}`, {
-    body: JSON.stringify(payload)
-  })
+  const res = await fetch(`${API_BASE}${path}`, init)
   if (!res.ok) {
     throw new Error(res.statusText)
   }
@@ -51,10 +49,10 @@ export const getInstanceTypes = invoker<undefined, IInstanceType[]>(
   'GET',
   '/instance-type'
 )
-export const getInstanceTypeQueueTime = (type: string) =>
+export const getInstanceTypeQueueTime = (type: string, time?: string) =>
   invoker<undefined, { duration: string }>(
     'GET',
-    `/instance-type/${type}/queue-time`
+    `/instance-type/${type}/queue-time` + (time ? `?time=${time}` : '')
   )(undefined)
 
 export interface IInstanceState {
@@ -81,6 +79,7 @@ export const updateInstanceState = (
 
 export interface ITask {
   creation: string
+  'queue-time': string
   'end-time': string
   instance: string
   'instance-type': string
@@ -93,6 +92,18 @@ export const getTasks = invoker<undefined, ITask[]>(
 )
 export const getTask = (name: string) =>
   invoker<undefined, ITask>('GET', () => `/task/${name}`)(undefined)
+export const updateTaskState = (
+  name: string,
+  lifeTime: string,
+  status: string
+) =>
+  invoker<unknown, IBaseResponse>(
+    'POST',
+    () => `/task/${name}/state`
+  )({
+    ['life-time']: lifeTime,
+    status
+  })
 
 export interface IBaseResponse {
   message: string

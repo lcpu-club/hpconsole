@@ -20,11 +20,21 @@
       </VCol>
       <VCol cols="12">
         <VCard>
-          <VCardTitle>My Tasks</VCardTitle>
-          <VCardText>
-            <!-- cluster info -->
-            Cluster info
-          </VCardText>
+          <div class="pr-4 flex justify-between items-center">
+            <VCardTitle>My Tasks</VCardTitle>
+            <div>
+              <VBtn color="primary" to="/task/new">Create</VBtn>
+            </div>
+          </div>
+          <VList>
+            <VListItem
+              v-for="task in tasks"
+              :key="task.name"
+              :title="task.name"
+              :value="task.name"
+              :to="`/task/view/${task.name}`"
+            />
+          </VList>
         </VCard>
       </VCol>
     </VRow>
@@ -32,5 +42,13 @@
 </template>
 
 <script lang="ts" setup>
+import { ITask } from '@/utils/api'
 import { user } from '@/utils/storage'
+import { ref } from 'vue'
+import { getTasks } from '@/utils/api'
+
+const tasks = ref<ITask[]>([])
+getTasks(undefined).then((res) => {
+  tasks.value = res
+})
 </script>

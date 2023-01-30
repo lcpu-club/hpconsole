@@ -1703,6 +1703,7 @@ __metadata:
     core-js: ^3.8.3
     eslint: ^8.22.0
     eslint-plugin-vue: ^9.3.0
+    izitoast: ^1.4.0
     roboto-fontface: "*"
     sass: ^1.55.0
     typescript: ^4.0.0
@@ -1715,6 +1716,11 @@ __metadata:
     vuetify: ^3.0.0
     webfontloader: ^1.0.0
     windicss: ^3.5.6
+    xterm: ^5.1.0
+    xterm-addon-attach: ^0.8.0
+    xterm-addon-fit: ^0.7.0
+    xterm-addon-search: ^0.11.0
+    xterm-addon-web-links: ^0.8.0
   languageName: unknown
   linkType: soft
 
@@ -1899,6 +1905,13 @@ __metadata:
   version: 2.0.0
   resolution: "isexe@npm:2.0.0"
   checksum: 26bf6c5480dda5161c820c5b5c751ae1e766c587b1f951ea3fcfc973bafb7831ae5b54a31a69bd670220e42e99ec154475025a468eae58ea262f813fdc8d1c62
+  languageName: node
+  linkType: hard
+
+"izitoast@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "izitoast@npm:1.4.0"
+  checksum: 08fe9d0e195c4485fb19d09262274b2626f29dfe502e14b5cc253e6cc403d7ce128b3b69579d7cfd573aa58f2badb9669bd9e774db7dea90561979c8c34aeed9
   languageName: node
   linkType: hard
 
@@ -3154,6 +3167,49 @@ __metadata:
   version: 4.0.0
   resolution: "xml-name-validator@npm:4.0.0"
   checksum: af100b79c29804f05fa35aa3683e29a321db9b9685d5e5febda3fa1e40f13f85abc40f45a6b2bf7bee33f68a1dc5e8eaef4cec100a304a9db565e6061d4cb5ad
+  languageName: node
+  linkType: hard
+
+"xterm-addon-attach@npm:^0.8.0":
+  version: 0.8.0
+  resolution: "xterm-addon-attach@npm:0.8.0"
+  peerDependencies:
+    xterm: ^5.0.0
+  checksum: 2ac70bdd1c97eb05b83b4573132ed9d3686c07ed14212e273800a5693bb0f3ea41c570b49ac90cb95a1e593d5a2764a28c13b649c596054bf5aa87c8489069eb
+  languageName: node
+  linkType: hard
+
+"xterm-addon-fit@npm:^0.7.0":
+  version: 0.7.0
+  resolution: "xterm-addon-fit@npm:0.7.0"
+  peerDependencies:
+    xterm: ^5.0.0
+  checksum: 512d41f80d6f9427ba02dab4e6fd642e94775a9cf7ef72ae4b55eab2a36856b5c67069bfc66b4af412fdce29a0842f9c6382af3672f0b514c4352dfd47defe8f
+  languageName: node
+  linkType: hard
+
+"xterm-addon-search@npm:^0.11.0":
+  version: 0.11.0
+  resolution: "xterm-addon-search@npm:0.11.0"
+  peerDependencies:
+    xterm: ^5.0.0
+  checksum: 13f263cd925f29c5c537d98584a8b203fc91cabe1fe205351baf0cf45cadccedc5249bce4db321f97b182a036e787e59e56c5866df271d3716aae04c71f1e448
+  languageName: node
+  linkType: hard
+
+"xterm-addon-web-links@npm:^0.8.0":
+  version: 0.8.0
+  resolution: "xterm-addon-web-links@npm:0.8.0"
+  peerDependencies:
+    xterm: ^5.0.0
+  checksum: fe07572adfaa84ceeb961db3ae577aeb2342ea5dcd4948170d1b733ae8045693fab8808f9c63cc43a532b033ae95e63e62ac14bc2e34def764e68f6362ccae2b
+  languageName: node
+  linkType: hard
+
+"xterm@npm:^5.1.0":
+  version: 5.1.0
+  resolution: "xterm@npm:5.1.0"
+  checksum: cbacbc9dc1bbcf21dabecff46856b43f2d5854b42c1bec4ea03a5720000f2a88d79b0da45b6c38213d6607474a1fbe66d5ff25fa120b7e9e60eeed964dd840a1
   languageName: node
   linkType: hard
 
