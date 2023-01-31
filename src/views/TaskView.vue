@@ -27,7 +27,13 @@
                     <!-- <code><b>Cost&nbsp;&nbsp;</b>{{ price }}</code> -->
                   </VCardText>
                   <VCardActions>
-                    <VBtn color="primary" block variant="flat" @click="start">
+                    <VBtn
+                      color="primary"
+                      block
+                      variant="flat"
+                      @click="start"
+                      :loading="starting"
+                    >
                       Start
                     </VBtn>
                   </VCardActions>
@@ -78,7 +84,14 @@ async function load() {
 }
 load()
 
+const starting = ref(false)
 function start() {
-  updateTaskState(props.taskName, lifeTime.value, 'active').then(load)
+  starting.value = true
+  updateTaskState(props.taskName, lifeTime.value, 'active')
+    .then(load)
+    .finally(() => {
+      starting.value = false
+      dialog.value = false
+    })
 }
 </script>
