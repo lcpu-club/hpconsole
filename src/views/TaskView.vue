@@ -27,8 +27,8 @@
                   <VCardText>
                     <VTextField v-model="lifeTime" label="Life time" />
                     <code><b>Price&nbsp;</b>{{ price }}</code>
-                    <!-- <br /> -->
-                    <!-- <code><b>Cost&nbsp;&nbsp;</b>{{ price }}</code> -->
+                    <br />
+                    <code><b>Cost&nbsp;&nbsp;</b>{{ cost }}</code>
                   </VCardText>
                   <VCardActions>
                     <VBtn
@@ -70,6 +70,7 @@ import {
 import { toast } from '@/utils/toast'
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import parse from 'parse-duration'
 
 const props = defineProps<{
   taskName: string
@@ -85,6 +86,12 @@ const price = computed(() =>
     .map(([key, val]) => `${val}@${key}`)
     .join()
 )
+const cost = computed(() => {
+  const min = parse(lifeTime.value, 'm')
+  return Object.entries(instanceType.value?.price ?? {})
+    .map(([key, val]) => `${Number((val * min).toFixed(4))}@${key}`)
+    .join()
+})
 async function load() {
   const res = await getTask(props.taskName)
   task.value = res

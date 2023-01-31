@@ -132,7 +132,7 @@ function shell() {
 }
 
 const execDialog = ref(false)
-const execCmd = ref('')
+const execCmd = ref('bash')
 
 function exec() {
   const url =
