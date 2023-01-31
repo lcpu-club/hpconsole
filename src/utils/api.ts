@@ -63,6 +63,8 @@ export const getInstanceTypes = invoker<undefined, IInstanceType[]>(
   'GET',
   '/instance-type'
 )
+export const getInstanceType = (type: string) =>
+  invoker<undefined, IInstanceType>('GET', `/instance-type/${type}`)(undefined)
 export const getInstanceTypeQueueTime = (type: string, time?: string) =>
   invoker<undefined, { duration: string }>(
     'GET',

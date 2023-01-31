@@ -4,6 +4,7 @@
       <VCol cols="12">
         <VCard>
           <VCardTitle>My Info</VCardTitle>
+          <VDivider />
           <VCardText>
             Welcome, <b>{{ user.name }}</b>
             <br />
@@ -26,6 +27,7 @@
               <VBtn color="primary" to="/task/new">Create</VBtn>
             </div>
           </div>
+          <VDivider />
           <VList>
             <VListItem
               v-for="task in tasks"
@@ -33,7 +35,32 @@
               :title="task.name"
               :value="task.name"
               :to="`/task/view/${task.name}`"
-            />
+            >
+              <template v-slot:append>
+                <div
+                  class="grid grid-cols-1 grid-flow-row text-right justify-items-end"
+                >
+                  <div class="flex items-center gap-2">
+                    <VChip size="small" :ripple="false" label>
+                      {{ task.status }}
+                    </VChip>
+                    <VChip
+                      label
+                      :ripple="false"
+                      size="small"
+                      variant="outlined"
+                    >
+                      {{ task['instance-type'] }}
+                    </VChip>
+                  </div>
+                  <TaskQueueTime
+                    v-if="task.status === 'queued'"
+                    :instance-type="task['instance-type']"
+                    :queue-time="task['queue-time']"
+                  />
+                </div>
+              </template>
+            </VListItem>
           </VList>
         </VCard>
       </VCol>
@@ -46,6 +73,7 @@ import { ITask } from '@/utils/api'
 import { user } from '@/utils/storage'
 import { ref } from 'vue'
 import { getTasks } from '@/utils/api'
+import TaskQueueTime from '@/components/QueueTime.vue'
 
 const tasks = ref<ITask[]>([])
 getTasks(undefined).then((res) => {

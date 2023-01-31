@@ -58,10 +58,8 @@ const props = defineProps<{
 }>()
 
 const instance = ref<IInstanceState>(null as never)
-function load() {
-  getInstanceState(props.instanceName).then((res) => {
-    instance.value = res
-  })
+async function load() {
+  instance.value = await getInstanceState(props.instanceName)
 }
 load()
 
