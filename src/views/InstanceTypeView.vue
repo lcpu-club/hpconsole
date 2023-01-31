@@ -5,7 +5,7 @@
         <VCard>
           <VCardTitle>Instance Types</VCardTitle>
           <VDivider />
-          <VList>
+          <VList lines="three">
             <VListItem
               v-for="itype of instanceTypes"
               :key="itype.name"
