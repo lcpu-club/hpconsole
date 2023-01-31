@@ -14,7 +14,13 @@
             <VTextField label="Task Name" v-model="taskName" />
           </VCardText>
           <VCardActions>
-            <VBtn color="primary" block variant="flat" @click.stop="create">
+            <VBtn
+              color="primary"
+              block
+              variant="flat"
+              @click.stop="create"
+              :loading="loading"
+            >
               Create
             </VBtn>
           </VCardActions>
@@ -26,6 +32,7 @@
 
 <script lang="ts" setup>
 import { createTask, getInstanceTypes, IInstanceType } from '@/utils/api'
+import { toast } from '@/utils/toast'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -38,12 +45,25 @@ getInstanceTypes(undefined).then((res) => {
   instanceTypes.value = res
 })
 
+const loading = ref(false)
 function create() {
+  loading.value = true
   createTask({
     name: taskName.value,
     ['instance-type']: instanceType.value
-  }).then(() => {
-    router.replace('/')
   })
+    .then(() => {
+      toast.success({
+        title: 'Task created',
+        message: 'Task created successfully'
+      })
+      router.replace('/')
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+    .finally(() => {
+      loading.value = false
+    })
 }
 </script>

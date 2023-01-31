@@ -1,6 +1,5 @@
 import { token, user } from './storage'
-import iziToast from 'izitoast'
-import 'izitoast/dist/css/iziToast.min.css'
+import { toast } from './toast'
 
 export const API_BASE = import.meta.env.VITE_VMSCHED_API
 
@@ -30,7 +29,7 @@ async function invoke(method: string, path: string, payload?: unknown) {
     }
     return data
   } catch (err) {
-    iziToast.error({
+    toast.error({
       title: 'Error',
       message: err instanceof Error ? err.message : 'Unknown error'
     })
