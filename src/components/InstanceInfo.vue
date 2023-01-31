@@ -23,6 +23,13 @@
         <VBtn variant="flat" color="warning" @click="command('restart')">
           Restart
         </VBtn>
+        <div class="flex simplify-checkbox">
+          <VCheckbox v-model="force" density="compact" label="Force" />
+          <VCheckbox v-model="stateful" density="compact" label="Stateful" />
+        </div>
+      </VCardActions>
+      <VDivider />
+      <VCardActions>
         <VBtn
           variant="outlined"
           @click="spice"
@@ -78,10 +85,15 @@ async function load() {
 }
 load()
 
+const force = ref(false)
+const stateful = ref(false)
 function command(action: string) {
-  return updateInstanceState(props.instanceName, action, false, false).then(
-    load
-  )
+  return updateInstanceState(
+    props.instanceName,
+    action,
+    force.value,
+    stateful.value
+  ).then(load)
 }
 
 const wsBase = import.meta.env.VITE_VMSCHED_WS
@@ -151,3 +163,9 @@ function webdav() {
   )
 }
 </script>
+
+<style>
+.simplify-checkbox .v-input__details {
+  display: none;
+}
+</style>
