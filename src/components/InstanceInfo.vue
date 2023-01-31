@@ -38,7 +38,7 @@
           SPICE
         </VBtn>
         <VBtn variant="outlined" @click="shell" prepend-icon="mdi-console">
-          Shell
+          Console
         </VBtn>
         <VBtn variant="outlined" prepend-icon="mdi-console">
           Exec
