@@ -104,10 +104,13 @@ export interface ITask {
 }
 export const getTasks = invoker<undefined, ITask[]>(
   'GET',
-  () => `/user/${user.value.name}/task`
+  () => `/user/${encodeURIComponent(user.value.name)}/task`
 )
 export const getTask = (name: string) =>
-  invoker<undefined, ITask>('GET', () => `/task/${name}`)(undefined)
+  invoker<undefined, ITask>(
+    'GET',
+    () => `/task/${encodeURIComponent(name)}`
+  )(undefined)
 export const updateTaskState = (
   name: string,
   lifeTime: string,
@@ -115,7 +118,7 @@ export const updateTaskState = (
 ) =>
   invoker<unknown, IBaseResponse>(
     'POST',
-    () => `/task/${name}/state`
+    () => `/task/${encodeURIComponent(name)}/state`
   )({
     ['life-time']: lifeTime,
     status
@@ -131,4 +134,4 @@ export const createTask = invoker<
     name: string
   },
   IBaseResponse
->('POST', () => `/user/${user.value.name}/task`)
+>('POST', () => `/user/${encodeURIComponent(user.value.name)}/task`)

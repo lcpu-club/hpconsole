@@ -23,9 +23,17 @@
         <VBtn variant="flat" color="warning" @click="command('restart')">
           Restart
         </VBtn>
-        <VBtn variant="outlined" @click="spice">SPICE</VBtn>
-        <VBtn variant="outlined" @click="shell">Shell</VBtn>
-        <VBtn variant="outlined">
+        <VBtn
+          variant="outlined"
+          @click="spice"
+          prepend-icon="mdi-remote-desktop"
+        >
+          SPICE
+        </VBtn>
+        <VBtn variant="outlined" @click="shell" prepend-icon="mdi-console">
+          Shell
+        </VBtn>
+        <VBtn variant="outlined" prepend-icon="mdi-console">
           Exec
           <VDialog v-model="execDialog" activator="parent" max-width="256">
             <VCard>
@@ -37,6 +45,13 @@
               </VCardActions>
             </VCard>
           </VDialog>
+        </VBtn>
+        <VBtn
+          variant="outlined"
+          @click="webdav"
+          prepend-icon="mdi-folder-network-outline"
+        >
+          WebDAV
         </VBtn>
       </VCardActions>
     </VCard>
@@ -119,5 +134,20 @@ function exec() {
       cmd: execCmd.value
     })
   window.open(router.resolve(`/terminal?connect=${btoa(url)}`).href, '_blank')
+}
+
+function webdav() {
+  const url = new URL(
+    import.meta.env.VITE_VMSCHED_WEBDAV +
+      '/' +
+      encodeURIComponent(props.instanceName) +
+      '/'
+  )
+  url.username = token.value.tokenName
+  url.password = token.value.tokenSecret
+  window.open(
+    router.resolve(`/webdav?connect=${btoa(url.toString())}`).href,
+    '_blank'
+  )
 }
 </script>

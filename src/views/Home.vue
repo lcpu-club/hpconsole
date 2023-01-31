@@ -34,7 +34,7 @@
               :key="task.name"
               :title="task.name"
               :value="task.name"
-              :to="`/task/view/${task.name}`"
+              :to="`/task/view/${encodeURIComponent(task.name)}`"
             >
               <template v-slot:append>
                 <div

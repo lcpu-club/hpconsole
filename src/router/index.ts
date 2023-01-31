@@ -24,6 +24,11 @@ const routes = [
     path: '/terminal',
     component: () => import('@/views/TerminalView.vue'),
     props: (route) => route.query
+  },
+  {
+    path: '/webdav',
+    component: () => import('@/views/WebdavView.vue'),
+    props: (route) => route.query
   }
 ] satisfies RouteRecordRaw[]
 
