@@ -1,11 +1,19 @@
 <template>
-  <VContainer>
-    <VRow>
+  <VContainer class="h-full flex">
+    <VRow align="stretch" class="self-stretch">
       <VCol cols="12">
-        <VCard>
-          <VCardTitle>Terminal</VCardTitle>
-          <VDivider />
-          <div ref="terminal" class="w-full min-h-64" v-resize="onResize"></div>
+        <VCard class="h-full d-flex flex-col items-stretch">
+          <div>
+            <VCardTitle>Terminal</VCardTitle>
+            <VDivider />
+          </div>
+          <div class="flex-1 grid place-items-stretch">
+            <div
+              ref="terminal"
+              class="w-full min-h-64"
+              v-resize="onResize"
+            ></div>
+          </div>
         </VCard>
       </VCol>
     </VRow>
