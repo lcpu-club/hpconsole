@@ -36,11 +36,15 @@ term.loadAddon(searchAddon)
 term.loadAddon(webLinksAddon)
 
 onMounted(() => {
+  term.open(terminal.value)
+  fitAddon.fit()
   term.writeln('Connecting to ' + url.value)
-  const socket = new WebSocket(url.value)
+  const urlInst = new URL(url.value)
+  urlInst.searchParams.set('height', String(term.rows))
+  urlInst.searchParams.set('width', String(term.cols))
+  const socket = new WebSocket(urlInst.toString())
   const attachAddon = new AttachAddon(socket)
   term.loadAddon(attachAddon)
-  term.open(terminal.value)
   socket.addEventListener('close', () => {
     term.writeln('Connection closed.')
   })
