@@ -23,8 +23,8 @@
                   <VCardText>
                     <VTextField v-model="lifeTime" label="Life time" />
                     <code><b>Price&nbsp;</b>{{ price }}</code>
-                    <br />
-                    <code><b>Cost&nbsp;&nbsp;</b>{{ price }}</code>
+                    <!-- <br /> -->
+                    <!-- <code><b>Cost&nbsp;&nbsp;</b>{{ price }}</code> -->
                   </VCardText>
                   <VCardActions>
                     <VBtn color="primary" block variant="flat" @click="start">
