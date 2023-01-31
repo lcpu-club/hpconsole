@@ -15,8 +15,12 @@
             />
           </VList>
           <VDivider />
-          <VCardActions v-if="task.status === 'inactive'">
-            <VBtn variant="flat" color="success" block>
+          <VCardActions>
+            <VBtn
+              variant="flat"
+              color="success"
+              :disabled="task.status !== 'inactive'"
+            >
               Start
               <VDialog v-model="dialog" activator="parent" max-width="480">
                 <VCard title="Start Instance">
@@ -40,6 +44,7 @@
                 </VCard>
               </VDialog>
             </VBtn>
+            <VBtn color="error" variant="flat" @click="del"> Delete </VBtn>
           </VCardActions>
         </VCard>
       </VCol>
@@ -59,9 +64,12 @@ import {
   getTask,
   IInstanceType,
   ITask,
-  updateTaskState
+  updateTaskState,
+  deleteTask
 } from '@/utils/api'
+import { toast } from '@/utils/toast'
 import { computed, ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 const props = defineProps<{
   taskName: string
@@ -93,5 +101,17 @@ function start() {
       starting.value = false
       dialog.value = false
     })
+}
+
+const router = useRouter()
+
+function del() {
+  deleteTask(props.taskName).then(() => {
+    toast.info({
+      title: 'Success',
+      message: 'Task deleted'
+    })
+    router.replace('/')
+  })
 }
 </script>

@@ -122,6 +122,11 @@ export const updateTaskState = (
     ['life-time']: lifeTime,
     status
   })
+export const deleteTask = (name: string) =>
+  invoker<undefined, IBaseResponse>(
+    'DELETE',
+    () => `/task/${encodeURIComponent(name)}`
+  )(undefined)
 
 export interface IBaseResponse {
   message: string
