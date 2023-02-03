@@ -7,6 +7,10 @@ const routes = [
     component: () => import('@/views/Home.vue')
   },
   {
+    path: '/help',
+    component: () => import('@/views/Help.vue')
+  },
+  {
     path: '/instance-types',
     component: () => import('@/views/InstanceTypeView.vue')
   },

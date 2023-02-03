@@ -14,6 +14,12 @@ const nav = [
     title: 'Instance Types',
     value: 'instance',
     to: '/instance-types'
+  },
+  {
+    prependIcon: 'mdi-help',
+    title: 'Help',
+    value: 'help',
+    to: '/help'
   }
 ]
 </script>
